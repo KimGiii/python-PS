@@ -1,7 +1,7 @@
 # chaining으로 구현된 ChainedHash 사용
 
 from enum import Enum
-from problem_solving.이론.hashing.chained_hash import ChainedHash
+from problem_solving.Algorithm.hashing.chained_hash import ChainedHash
 
 # 메뉴 선언
 Menu = Enum('Menu', ['추가', '삭제', '검색', '덤프', '종료'])

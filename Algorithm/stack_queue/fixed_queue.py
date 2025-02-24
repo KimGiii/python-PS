@@ -13,11 +13,11 @@ class FixedQueue:
 
     def __init__(self, capacity : int) -> None:
         """큐 초기화"""
-        self.no = 0
-        self.front = 0
-        self.rear = 0
-        self.capacity = capacity
-        self.que = [None] * capacity
+        self.no = 0                     # 큐에 쌓여 있는 데이터 개수를 나타냄
+        self.front = 0                  # 맨 앞의 원소를 나타내는 인덱스
+        self.rear = 0                   # 맨 뒤의 원소를 나타내는 인덱스
+        self.capacity = capacity        # 큐의 최대 크기
+        self.que = [None] * capacity    # 큐의 배열로서 밀어 넣는 데이터를 저장하는 list형 배열
 
     def __len__(self) -> int:
         """큐에 있는 모든 데이터 개수 반환"""
@@ -33,8 +33,11 @@ class FixedQueue:
 
     def enque(self, x: Any) -> None:
         """데이터 x를 인큐"""
+
+        # 큐가 가득 차서 Enqueue할 수 없는 경우 예외 처리
         if self.is_full():
             raise FixedQueue.Full
+
         self.que[self.rear] = x
         self.rear += 1
         self.no += 1
@@ -43,8 +46,10 @@ class FixedQueue:
 
     def deque(self) -> Any:
         """데이터를 디큐"""
+
         if self.is_empty():
             raise FixedQueue.Empty
+
         x = self.que[self.front]
         self.front += 1
         self.no -= 1
