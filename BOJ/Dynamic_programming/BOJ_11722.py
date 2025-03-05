@@ -20,5 +20,5 @@ for i in arr:
     else:
         dp[p] = val
 
-print(dp)
+# print(dp)
 print(len(dp))
