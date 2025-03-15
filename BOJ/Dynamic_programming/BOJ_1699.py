@@ -8,18 +8,29 @@
 316의 제곱 = 99856
 """
 
-n = int(input())
-dp = [i for i in range(n+1)]
+from sys import stdin
+readline = stdin.readline
 
-# 제곱수를 기준으로 모든 경우를 계산, 최솟값을 저장
-for i in range(2, n+1):
-    for j in range(1, i+1):
-        # 제곱수를 생성
-        square = j * j
-        if square > i:
-            break
+# 라그랑주의 네 제곱수 정리에 의해, 모든 자연수는 최대 4개의 제곱수 합으로 표현 가능
+def min_square_sum(n):
+    # 제곱수인 경우 1 반환
+    if int(n ** 0.5) ** 2 == n:
+        return 1
 
-        if dp[i] > dp[i-square]+1:
-            dp[i] = dp[i-square] + 1
+    # 두 제곱수의 합으로 표현 가능한지 확인
+    for i in range(1, int(n ** 0.5) + 1):
+        if int((n - i ** 2) ** 0.5) ** 2 == n - i ** 2:
+            return 2
 
-print(dp[n])
+    # n = 4^k * (8*m + 7) 형태인지 확인 (이 경우 항상 4개의 제곱수 필요)
+    temp = n
+    while temp % 4 == 0:
+        temp //= 4
+    if temp % 8 == 7:
+        return 4
+
+    # 그 외의 경우는 모두 3개의 제곱수로 표현 가능
+    return 3
+
+x = int(readline())
+print(min_square_sum(x))
